@@ -67,3 +67,17 @@ document.getElementById("taskInput").addEventListener("keypress", function(event
         addTask();
     }
 });
+
+function toggleTheme() {
+    document.body.classList.toggle('dark-mode');
+    document.querySelector('.container').classList.toggle('dark-mode');
+    document.querySelector('footer').classList.toggle('dark-mode');
+    document.querySelector('footer p').classList.toggle('dark-mode');
+    document.querySelector('button').classList.toggle('dark-mode');
+    document.querySelectorAll('li').forEach(function(item) {
+        item.classList.toggle('dark-mode');
+    });
+    
+    let buttonText = document.body.classList.contains('dark-mode') ? "🌙 Light Mode" : "🌚 Dark Mode";
+    document.getElementById('themeToggle').textContent = buttonText;
+}

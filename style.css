@@ -9,6 +9,7 @@ body {
     height: 100vh;
     margin: 0;
     font-family: 'Poppins', sans-serif;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 .container {
@@ -18,12 +19,14 @@ body {
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     text-align: center;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 h1 {
     color: #007BFF;
     margin-bottom: 15px;
     font-size: 24px;
+    transition: color 0.3s;
 }
 
 .input-container {
@@ -39,6 +42,7 @@ input[type="text"] {
     border: 1px solid #ccc;
     font-size: 16px;
     outline: none;
+    transition: background-color 0.3s, border-color 0.3s;
 }
 
 button {
@@ -49,7 +53,7 @@ button {
     border-radius: 8px;
     cursor: pointer;
     font-size: 16px;
-    transition: 0.2s;
+    transition: 0.3s;
 }
 
 button:hover {
@@ -71,7 +75,7 @@ li {
     margin: 6px 0;
     border-radius: 8px;
     font-size: 16px;
-    transition: 0.2s;
+    transition: background-color 0.3s;
 }
 
 li:hover {
@@ -86,7 +90,7 @@ li button {
     border-radius: 5px;
     padding: 6px 12px;
     font-size: 14px;
-    transition: 0.2s;
+    transition: 0.3s;
 }
 
 li button:hover {
@@ -98,14 +102,54 @@ footer {
     margin-top: 20px;
     padding: 10px;
     background-color: #e3f2fd;
-    border-top: 1px solid #ccc;
+    border-top: 1px solid #dcdcdc;
     width: 100%;
     position: fixed;
     bottom: 0;
+    transition: background-color 0.3s;
 }
 
 footer p {
     color: #333;
     font-size: 14px;
     font-weight: bold;
+    transition: color 0.3s;
+}
+
+body.dark-mode {
+    background-color: #444444;
+    color: #e0e0e0;
+}
+
+.container.dark-mode {
+    background-color: #555555;
+}
+
+footer.dark-mode {
+    background-color: #333333;
+    border-top: 1px solid #555555; /* Darker gray border in dark mode */
+}
+
+footer p.dark-mode {
+    color: #e0e0e0;
+}
+
+button.dark-mode {
+    background-color: #888888;
+}
+
+li.dark-mode {
+    background-color: #666666;
+}
+
+li.dark-mode:hover {
+    background-color: #777777;
+}
+
+li button.dark-mode {
+    background-color: #ff4d4d;
+}
+
+li button.dark-mode:hover {
+    background-color: #cc0000;
 }

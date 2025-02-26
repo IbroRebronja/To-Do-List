@@ -7,7 +7,6 @@ function addTask() {
 
         const li = document.createElement("li");
 
-        // Create checkbox
         const checkBox = document.createElement("input");
         checkBox.type = "checkbox";
         checkBox.onclick = function() {
@@ -24,8 +23,15 @@ function addTask() {
             saveTasks(); 
         };
 
+        const editButton = document.createElement("button");
+        editButton.textContent = "Edit";
+        editButton.onclick = function() {
+            editTask(taskLabel, li, editButton);
+        };
+
         li.appendChild(checkBox);
         li.appendChild(taskLabel);
+        li.appendChild(editButton);
         li.appendChild(deleteButton);
         taskList.appendChild(li);
 
@@ -38,12 +44,12 @@ function addTask() {
 function toggleCompletion(li, checkBox) {
     const taskLabel = li.querySelector("span");
     if (checkBox.checked) {
-        taskLabel.style.textDecoration = "line-through";  // Strike-through the task
+        taskLabel.style.textDecoration = "line-through"; 
     } else {
-        taskLabel.style.textDecoration = "none";  // Remove the strike-through
+        taskLabel.style.textDecoration = "none";  
     }
 
-    saveTasks();  // Save updated task state
+    saveTasks(); 
 }
 
 function saveTasks() {
@@ -78,7 +84,7 @@ function loadTasks() {
             const taskLabel = document.createElement("span");
             taskLabel.textContent = task.text;
             if (task.completed) {
-                taskLabel.style.textDecoration = "line-through";  // Apply strike-through if task is completed
+                taskLabel.style.textDecoration = "line-through"; 
             }
 
             const deleteButton = document.createElement("button");
@@ -88,23 +94,68 @@ function loadTasks() {
                 saveTasks(); 
             };
 
+            const editButton = document.createElement("button");
+            editButton.textContent = "Edit";
+            editButton.onclick = function() {
+                editTask(taskLabel, li, editButton); 
+            };
+
             li.appendChild(checkBox);
             li.appendChild(taskLabel);
+            li.appendChild(editButton);
             li.appendChild(deleteButton);
             taskList.appendChild(li);
         });
     }
 }
 
-window.onload = function() {
-    loadTasks();
+function editTask(taskLabel, li, editButton) {
+    const newText = document.createElement("input");
+    newText.type = "text";
+    newText.value = taskLabel.textContent; 
+
+    li.replaceChild(newText, taskLabel);
+
+    li.removeChild(editButton);
+
+    const saveButton = document.createElement("button");
+    saveButton.textContent = "Save";
+    saveButton.onclick = function() {
+        saveEdit(newText, li, saveButton);
+    };
+
+    newText.parentNode.appendChild(saveButton);
+
+    newText.addEventListener("keypress", function(event) {
+        if (event.key === "Enter") {
+            saveEdit(newText, li, saveButton);
+        }
+    });
 }
 
-document.getElementById("taskInput").addEventListener("keypress", function(event) {
-    if (event.key === "Enter") {
-        addTask();
+function saveEdit(newText, li, saveButton) {
+    if (newText.value.trim() !== "") {
+
+        const taskLabel = document.createElement("span");
+        taskLabel.textContent = newText.value.trim();
+
+
+        li.replaceChild(taskLabel, newText);
+
+
+        const editButton = document.createElement("button");
+        editButton.textContent = "Edit";
+        editButton.onclick = function() {
+            editTask(taskLabel, li, editButton); 
+        };
+
+        li.appendChild(editButton);
+
+        saveButton.remove();
+
+        saveTasks();
     }
-});
+}
 
 function toggleTheme() {
     document.body.classList.toggle('dark-mode');
@@ -119,3 +170,5 @@ function toggleTheme() {
     let buttonText = document.body.classList.contains('dark-mode') ? "🌙 Light Mode" : "🌚 Dark Mode";
     document.getElementById('themeToggle').textContent = buttonText;
 }
+
+document.addEventListener("DOMContentLoaded", loadTasks);

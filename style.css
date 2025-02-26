@@ -14,6 +14,7 @@ body {
 
 .container {
     max-width: 450px;
+    width: 100%;
     background-color: #ffffff;
     padding: 25px;
     border-radius: 12px;
@@ -76,6 +77,23 @@ li {
     border-radius: 8px;
     font-size: 16px;
     transition: background-color 0.3s;
+    overflow-wrap: break-word; /* Break long words */
+    word-wrap: break-word; /* Ensure long words break and wrap to the next line */
+    white-space: normal; /* Allow the text to wrap */
+    word-break: break-word; /* Force word break if necessary */
+    width: 100%; /* Make sure the width is contained */
+}
+
+li .task-text {
+    flex-grow: 1; 
+    word-wrap: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+}
+
+li span {
+    flex-grow: 1; /* Make sure the task text takes up available space */
+    word-wrap: break-word; /* Allow wrapping of long text */
 }
 
 li:hover {
@@ -91,6 +109,8 @@ li button {
     padding: 6px 12px;
     font-size: 14px;
     transition: 0.3s;
+    flex-shrink: 0;
+    margin-left: 10px; 
 }
 
 li button:hover {
@@ -152,4 +172,34 @@ li button.dark-mode {
 
 li button.dark-mode:hover {
     background-color: #cc0000;
+}
+
+li input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #007BFF;
+    border-radius: 4px;
+    background-color: #fff;
+    transition: background-color 0.3s, border-color 0.3s;
+    cursor: pointer;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0; /* Prevent shrinking */
+}
+
+li input[type="checkbox"]:checked {
+    background-color: #007BFF;
+    border-color: #0056b3;
+}
+
+li input[type="checkbox"]:checked::after {
+    content: "✔";
+    font-size: 14px;
+    color: white;
+}
+
+li input[type="checkbox"]:hover {
+    border-color: #0056b3;
 }

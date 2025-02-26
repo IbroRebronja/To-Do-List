@@ -31,8 +31,9 @@ function addTask() {
 
         li.appendChild(checkBox);
         li.appendChild(taskLabel);
-        li.appendChild(editButton);
         li.appendChild(deleteButton);
+        li.appendChild(editButton);
+
         taskList.appendChild(li);
 
         saveTasks();
@@ -102,8 +103,11 @@ function loadTasks() {
 
             li.appendChild(checkBox);
             li.appendChild(taskLabel);
-            li.appendChild(editButton);
             li.appendChild(deleteButton);
+            li.appendChild(editButton);
+
+
+
             taskList.appendChild(li);
         });
     }
